@@ -6,6 +6,9 @@ import java.awt.*;
 public class GameState {
 
     private Minimax minimax = null;
+    public static Color[] getAllPossiblePixelColors(){
+        return new Color[]{Main.white, Main.green, Main.purple, Main.yellow};
+    }
 
     public void init(){
         minimax = new Minimax();

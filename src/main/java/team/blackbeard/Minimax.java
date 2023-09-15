@@ -23,17 +23,28 @@ public class Minimax {
                     continue;
                 if (y == 0 || (x == 0 && b[0][Math.max(y-1,0)] != null && y % 2 != 0) || (x == (y % 2 == 0 ? 5 : 6) && b[y % 2 != 0 ? 5 : 6][Math.max(y-1,0)] != null && y % 2 != 0)){ //y >= 0
                     if(b[x][y] == null){
-                        actions.add(new Action(null, new int[]{x,y}));
+                        for(Color c : GameState.getAllPossiblePixelColors()){
+                            actions.add(new Action(c, new int[]{x,y}));
+                        }
+
                     }
                 }else if(b[y % 2 != 0 ? Math.max(x-1,0) : x+1][Math.max(y-1,0)] != null && b[x][Math.max(y-1,0)] != null){ //y > 0
                     if(b[x][y] == null){
-                        actions.add(new Action(null, new int[]{x,y}));
+                        for(Color c : GameState.getAllPossiblePixelColors()){
+                            actions.add(new Action(c, new int[]{x,y}));
+                        }
                     }
                 }
             }
         }
         return actions.toArray(new Action[0]);
     }
+
+    public Color[][] applyAction(Color[][] board, Action action){
+        board[action.coordinate[0]][action.coordinate[1]] = action.color;
+        return board;
+    }
+
+
+
 }
-//actions.add(new Action(null, new int[]{x,y}));
-//                        xPlaced[x] = true;
