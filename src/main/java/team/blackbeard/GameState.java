@@ -11,9 +11,14 @@ public class GameState {
         minimax = new Minimax();
         Color[][] board = getBoard();
         board[0][0] = Main.green;
+        board[1][0] = Main.green;
+        board[2][1] = Main.green;
+        board[3][1] = Main.green;
         board[3][0] = Main.green;
+        board[2][0] = Main.green;
         board[5][0] = Main.green;
-        board[5][2] = Main.green;
+        board[4][0] = Main.green;
+        board[4][1] = Main.green;
 //        board[1][1] = Main.green;
         System.out.println("Initialized!");
     }

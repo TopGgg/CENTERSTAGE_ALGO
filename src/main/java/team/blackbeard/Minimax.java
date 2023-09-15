@@ -21,12 +21,14 @@ public class Minimax {
             for (int x = 0; x < 7; x++){
                 if(y % 2 == 0 && x == 6)
                     continue;
-                if (y == 0 || (x == 0 && b[0][Math.max(y-1,0)] != null && y % 2 != 0) || (x == (y % 2 == 0 ? 5 : 6) && b[y % 2 != 0 ? 5 : 6][Math.max(y-1,0)] != null && y % 2 != 0)){
+                if (y == 0 || (x == 0 && b[0][Math.max(y-1,0)] != null && y % 2 != 0) || (x == (y % 2 == 0 ? 5 : 6) && b[y % 2 != 0 ? 5 : 6][Math.max(y-1,0)] != null && y % 2 != 0)){ //y >= 0
                     if(b[x][y] == null){
                         actions.add(new Action(null, new int[]{x,y}));
                     }
-                }else if(){
-
+                }else if(b[y % 2 != 0 ? Math.max(x-1,0) : x+1][Math.max(y-1,0)] != null && b[x][Math.max(y-1,0)] != null){ //y > 0
+                    if(b[x][y] == null){
+                        actions.add(new Action(null, new int[]{x,y}));
+                    }
                 }
             }
         }
