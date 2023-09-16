@@ -5,9 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64e9ba20-c95c-4876-a6a6-68e2a5a76ea6" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/team/blackbeard/Reward.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/team/blackbeard/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/blackbeard/GameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/team/blackbeard/Minimax.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/blackbeard/Minimax.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/team/blackbeard/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/blackbeard/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/team/blackbeard/Minimax.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/blackbeard/HexagonSorter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,12 +37,26 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 3
+}]]></component>
   <component name="ProjectId" id="2VLUk3yxHYeB1SwiXkgotfqwEtP" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master"
+  }
+}]]></component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="team.blackbeard.Main" />

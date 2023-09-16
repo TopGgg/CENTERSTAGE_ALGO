@@ -10,7 +10,7 @@ public class Main extends JPanel {
     private final int WIDTH = 1200;
     private final int HEIGHT = 800;
 
-    public Color[][] board = new Color[7][13];
+    public GameState.State[][] board = new GameState.State[7][13];
 
     private Font font = new Font("Arial", Font.BOLD, 18);
     FontMetrics metrics;
@@ -31,9 +31,13 @@ public class Main extends JPanel {
     public Main() {
         instance = this;
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        for (int y = 0; y < 13; y++){
-            if(y % 2 == 0){
-                board[6][y] = null;
+        for (int x = 0; x < 7; x++) {
+            for (int y = 0; y < 13; y++) {
+                if (y % 2 == 0 && x == 6) {
+                    board[6][y] = GameState.State.Invalid;
+                }else {
+                    board[x][y] = GameState.State.Empty;
+                }
             }
         }
         gameState = new GameState();
@@ -58,7 +62,7 @@ public class Main extends JPanel {
         metrics = g.getFontMetrics();
 
 
-        drawHexGridLoop(g2d, origin, 13, 50, 8);
+        drawHexGridLoop(g2d, origin, 13, 20, 8);
     }
 
     private void drawHexGridLoop(Graphics g, Point origin, int size, int radius, int padding) {
@@ -76,7 +80,7 @@ public class Main extends JPanel {
                 int x = (int) (origin.x + xOff * (col * 2) + (row % 2 == 0 ? radius : 0) -50);
                 int y = (int) (origin.y + yOff  *(row - half) * 3+100);
 
-                drawHex(g, xLbl, yLbl, x, y, radius, board[col][12-row] == null ? Color.BLACK : board[col][12-row]);
+                drawHex(g, xLbl, yLbl, x, y, radius, board[col][12-row] == GameState.State.Empty ? Color.BLACK : new Color(board[col][12-row].state));
             }
         }
     }
