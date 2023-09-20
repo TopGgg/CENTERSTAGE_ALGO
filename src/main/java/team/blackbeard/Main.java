@@ -28,7 +28,7 @@ public class Main extends JPanel {
         return instance;
     }
 
-    public Main() {
+    public Main() throws InterruptedException {
         instance = this;
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         for (int x = 0; x < 7; x++) {
@@ -127,7 +127,7 @@ public class Main extends JPanel {
         g.setStroke(tmpS);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         JFrame f = new JFrame();
         Main p = new Main();
 
