@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64e9ba20-c95c-4876-a6a6-68e2a5a76ea6" name="Changes" comment="Added reward system">
-      <change afterPath="$PROJECT_DIR$/src/main/java/team/blackbeard/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/team/blackbeard/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/blackbeard/GameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/team/blackbeard/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/blackbeard/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/team/blackbeard/Reward.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/blackbeard/Reward.java" afterDir="false" />
-    </list>
+    <list default="true" id="64e9ba20-c95c-4876-a6a6-68e2a5a76ea6" name="Changes" comment="Added reward system" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

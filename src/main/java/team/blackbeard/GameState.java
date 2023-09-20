@@ -85,7 +85,7 @@ public class GameState {
 //                    }
 //                    for(int i = 0; i < 12; i++){
 //                        for(int j = 0; j < 7; j++){
-//                            board[j][i] = State.Empty;
+ma//                            board[j][i] = State.Empty;
 //                        }
 //                    }
 //                }
