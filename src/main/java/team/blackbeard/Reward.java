@@ -1,7 +1,9 @@
 package team.blackbeard;
 
 import java.awt.*;
+import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Reward {
 
@@ -19,6 +21,18 @@ public class Reward {
         @Override
         public String toString(){
             return "("+pixel1[0]+","+pixel1[1]+"),"+"("+pixel2[0]+","+pixel2[1]+"),"+"("+pixel3[0]+","+pixel3[1]+")";
+        }
+
+        public int[] getPixel(int index){
+            if(index == 0){
+                return pixel1;
+            }else if(index == 1){
+                return pixel2;
+            } else if (index == 2) {
+                return pixel3;
+            }else {
+                throw new RuntimeException("Index out of range - Mosaic#getPixel");
+            }
         }
     }
 
@@ -101,17 +115,45 @@ public class Reward {
                     if(i >= neighbors.size()-1)
                         break;
 
-                    System.out.println(p);
                     GameState.Point nextP = neighbors.get(i + 1);
                     Mosaic mosaic = new Mosaic(Utils.pointToIntArr(nextP)
                             , new int[]{x,y}, Utils.pointToIntArr(p));
                     if(isMosaic(b, mosaic)){
+                        System.out.println(mosaic);
                         mosaics.add(mosaic);
                     }
                     i++;
                 }
             }
         }
-        return mosaics.size()*10;
+        ArrayList<Mosaic> newMosaics = new ArrayList<>();
+        for(Mosaic mosaic : mosaics){
+            boolean contains = true;
+            for(int i = 0; i < 3; i++){
+                if(!containsMosaic(mosaic.getPixel(i), mosaics)){
+                    contains = false;
+                }
+            }
+            if(!contains){
+                newMosaics.add(mosaic);
+            }
+        }
+        newMosaics = Utils.removeDuplicates(newMosaics);
+
+        return (mosaics.size()-newMosaics.size())*10;
     }
+
+    private static boolean containsMosaic(int[] point, ArrayList<Mosaic> mosaics){
+        int counts = 0;
+        for(Mosaic mosaic : mosaics){
+            for(int i = 0; i < 3; i++){
+                if(mosaic.getPixel(i)[0] == point[0] && mosaic.getPixel(i)[1] == point[1]){
+                    counts++;
+                }
+            }
+        }
+        return counts >= 2;
+    }
+
+
 }
