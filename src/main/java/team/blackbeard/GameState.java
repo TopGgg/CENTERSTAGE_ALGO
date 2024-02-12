@@ -1,5 +1,7 @@
 package team.blackbeard;
 
+import team.blackbeard.calc.Board;
+
 import java.awt.*;
 import java.util.Arrays;
 
@@ -37,63 +39,47 @@ public class GameState {
 
     }
     private HexagonSorter hexagonSorter = null;
+    private Board.Backdrop game = null;
     public static Color[] getAllPossiblePixelColors(){
         return new Color[]{Main.white, Main.green, Main.purple, Main.yellow};
     }
 
     public void init(){
-        hexagonSorter = new HexagonSorter();
         State[][] board = getBoard();
-//        board[0][0] = State.Green;
-//        board[1][0] = State.Green;
-//        board[2][1] = State.Green;
-//        board[3][1] = State.Green;
-//        board[3][0] = State.Green;
-//        board[2][0] = State.Green;
-//        board[5][0] = State.Green;
-//        board[4][0] = State.Green;
-//        board[4][1] = State.Green;
-//        board[4][2] = State.Green;
-//        board[4][3] = State.Green;
-        board[0][0] = State.Green;
-        board[1][0] = State.Green;
-        board[1][1] = State.Green;
+
+        game = new Board.Backdrop();
+
+        game.findPixel(0,0).type = Board.PIXEL_TYPE.GREEN;
+        game.findPixel(1,0).type = Board.PIXEL_TYPE.GREEN;
+        game.findPixel(1,1).type = Board.PIXEL_TYPE.GREEN;
+
+        for(Board.Pixel pixel : game.pixels){
+            State state = State.Empty;
+            switch (pixel.type){
+                case GREEN:
+                    state = State.Green;
+                    break;
+                case PURPLE:
+                    state = State.Purple;
+                    break;
+                case YELLOW:
+                    state = State.Yellow;
+                case WHITE:
+                    state = State.White;
+                case NONE:
+                    state = State.Empty;
+            }
+            board[pixel.x][pixel.y] = state;
+        }
+
+
         System.out.println("Initialized!");
     }
 
     public void start() throws InterruptedException {
         System.out.println("Started!");
-        HexagonSorter.Action[] actions = hexagonSorter.getAllActions(getBoard());
-        State[][] board = getBoard();
-//        for(HexagonSorter.Action action : actions){
-//            int[] coordinate = action.coordinate;
-//            board[coordinate[0]][coordinate[1]] = State.Purple;
-//        }
-//        new Thread(()->{
-//            for(int y = 0; y < 12; y++){
-//                for(int x = 0; x < 7; x++){
-//                    board[x][y] = State.Green;
-//                    for(Point point : Reward.getNeighbors(new int[]{x,y})){
-//                        board[point.x][point.y] = State.Purple;
-//                    }
-//                    setBoard(board);
-//                    Main.getInstance().update();
-//                    try {
-//                        Thread.sleep(1000);
-//                    } catch (InterruptedException e) {
-//                        throw new RuntimeException(e);
-//                    }
-//                    for(int i = 0; i < 12; i++){
-//                        for(int j = 0; j < 7; j++){
-//                            board[j][i] = State.Empty;
-//                        }
-//                    }
-//                }
-//            }
-//        }).start();
 
-        System.out.println(Reward.calcMosaics(board));
-
+        System.out.println(game.score());
     }
 
 

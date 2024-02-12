@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64e9ba20-c95c-4876-a6a6-68e2a5a76ea6" name="Changes" comment="Added reward system">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/team/blackbeard/Reward.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/blackbeard/Reward.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/team/blackbeard/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/blackbeard/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/team/blackbeard/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team/blackbeard/GameState.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,11 +49,15 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "master",
-    "node.js.selected.package.tslint": "(autodetect)"
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="team.blackbeard.Main" />
       <module name="CenterStageGameModel.main" />
@@ -67,8 +71,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="team.blackbeard.test" />
+      <module name="CenterStageGameModel.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="team.blackbeard.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.test" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -81,6 +99,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1694614996652</updated>
+      <workItem from="1707734311153" duration="39000" />
     </task>
     <task id="LOCAL-00001" summary="Added reward system">
       <option name="closed" value="true" />
