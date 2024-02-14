@@ -52,6 +52,7 @@ public class GameState {
 
         game.findPixel(0,0).type = Board.PIXEL_TYPE.GREEN;
         game.findPixel(1,0).type = Board.PIXEL_TYPE.GREEN;
+        game.findPixel(1,1).type = Board.PIXEL_TYPE.GREEN;
 //        game.findPixel(1,1).type = Board.PIXEL_TYPE.GREEN;
 
         for(Board.Pixel pixel : game.pixels){
@@ -81,42 +82,47 @@ public class GameState {
     public void start() throws InterruptedException {
         System.out.println("Started!");
 
+        long start = System.currentTimeMillis();
+//        int currentScore = game.score();
+//        System.out.println(currentScore);
+//        Board.Action[] possibleActions = game.getPossibleActions();
+//        int maxScore = currentScore;
+//        Board.Action[] maxScoreActions = null;
+//        for(Board.Action action : possibleActions){
+//            Board.Pixel pixel = game.findPixel(action.x, action.y);
+//            Board.PIXEL_TYPE type = pixel.type;
+//            pixel.type = action.type;
+//            for(Board.Action action1 : game.getPossibleActions()){
+//                Board.Pixel pixel1 = game.findPixel(action1.x, action1.y);
+//                Board.PIXEL_TYPE type1 = pixel1.type;
+//                pixel1.type = action1.type;
+//                for (Board.Action action2 : game.getPossibleActions()){
+//                    Board.Pixel pixel2 = game.findPixel(action2.x, action2.y);
+//                    Board.PIXEL_TYPE type2 = pixel2.type;
+//                    pixel2.type = action2.type;
+//                    int score = game.score();
+//                    if(score > maxScore){
+//                        System.out.println("New Max Score");
+//                        maxScore = score;
+//                        maxScoreActions = new Board.Action[] {action, action1, action2};
+//                    }
+//                    game.findPixel(action2.x, action2.y).type = type2;
+//                }
+//                game.findPixel(action1.x, action1.y).type = type1;
+//            }
+//            game.findPixel(action.x, action.y).type = type;
+//        }
 
-        int currentScore = game.score();
-        Board.Action[] possibleActions = game.getPossibleActions();
-        int maxScore = currentScore;
-        Board.Action[] maxScoreActions = null;
-        for(Board.Action action : possibleActions){
-            Board.Pixel pixel = game.findPixel(action.x, action.y);
-            Board.PIXEL_TYPE type = pixel.type;
-            pixel.type = action.type;
-            for(Board.Action action1 : game.getPossibleActions()){
-                Board.Pixel pixel1 = game.findPixel(action1.x, action1.y);
-                Board.PIXEL_TYPE type1 = pixel1.type;
-                pixel1.type = action1.type;
-                for (Board.Action action2 : game.getPossibleActions()){
-                    Board.Pixel pixel2 = game.findPixel(action2.x, action2.y);
-                    Board.PIXEL_TYPE type2 = pixel2.type;
-                    pixel2.type = action2.type;
-                    int score = game.score();
-                    if(score > maxScore){
-                        maxScore = score;
-                        maxScoreActions = new Board.Action[] {action, action1, action2};
-                    }
-                    game.findPixel(action2.x, action2.y).type = type2;
-                }
-                game.findPixel(action1.x, action1.y).type = type1;
-            }
-            game.findPixel(action.x, action.y).type = type;
-        }
+        Board.Action[] maxScoreActions = game.getBestActions();
 
         if(maxScoreActions != null){
-            System.out.println(maxScore);
             System.out.println(Arrays.toString(maxScoreActions));
             game.findPixel(maxScoreActions[0].x, maxScoreActions[0].y).type = maxScoreActions[0].type;
             game.findPixel(maxScoreActions[1].x, maxScoreActions[1].y).type = maxScoreActions[1].type;
             game.findPixel(maxScoreActions[2].x, maxScoreActions[2].y).type = maxScoreActions[2].type;
         }
+
+        System.out.println(System.currentTimeMillis() - start);
 
         State[][] board = getBoard();
 

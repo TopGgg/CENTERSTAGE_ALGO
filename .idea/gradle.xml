@@ -7,7 +7,7 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
-            <option value="/media/adarw/Data/Documents/Programing/Java/Projects/CenterStageAlgo" />
+            <option value="$PROJECT_DIR$" />
           </set>
         </option>
       </GradleProjectSettings>

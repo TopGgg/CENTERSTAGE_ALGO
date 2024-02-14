@@ -89,15 +89,27 @@ public class Board {
             colors.add(type.toString());
 
             // If the 2 colored neighbors also only have two colored neighbors, then this may be a mosaic.
-            for (int i = 0; i < coloredNeighbors.size(); i++)
+            for (int i = 0; i < 2; i++)
             {
                 Pixel neighbor = coloredNeighbors.get(i);
+
+                ArrayList<Pixel> neighborsColoredNeighbors1 = new ArrayList<>();
+                for (int j = 0; j < neighbor.neighbors.size(); j++)
+                {
+                    if (neighbor.neighbors.get(j).type != PIXEL_TYPE.NONE && neighbor.neighbors.get(j).type != PIXEL_TYPE.WHITE) {
+                        neighborsColoredNeighbors1.add(neighbor.neighbors.get(j));
+                    }
+                }
+
+                if(neighborsColoredNeighbors1.size() != 2){
+                    return false;
+                }
 
                 ArrayList<Pixel> neighborsColoredNeighbors = new ArrayList<>();
                 for (int j = 0; j < neighbor.neighbors.size(); j++)
                 {
-                    if (neighbor.neighbors.get(j).type != PIXEL_TYPE.NONE && neighbor.neighbors.get(j).type != PIXEL_TYPE.WHITE)
-                    {
+                    if (neighbor.neighbors.get(j).type != PIXEL_TYPE.NONE && neighbor.neighbors.get(j).type != PIXEL_TYPE.WHITE &&
+                            (neighbor.neighbors.get(j).neighbors.contains(this)||neighbor.neighbors.get(j)==this)) {
                         neighborsColoredNeighbors.add(neighbor.neighbors.get(j));
                     }
                 }
@@ -272,6 +284,10 @@ public class Board {
 
             setLineScore = totalSetLines * POINTS_PER_SET_LINE;
 
+            System.out.println("Set Line: " + setLineScore);
+            System.out.println("Pixel Score: " + pixelScore);
+            System.out.println("Mosaic Score:" + mosaicScore);
+
             return pixelScore + setLineScore + mosaicScore;
         }
 
@@ -284,7 +300,9 @@ public class Board {
                         continue;
                     if(pixel.type == PIXEL_TYPE.NONE){
                         if(y == 0 ||
-                                (x == 0 && findPixel(x,Math.max(y-1, 0)).type != PIXEL_TYPE.NONE) ||
+                                (x == 0 && findPixel(x,Math.max(y-1, 0)).type != PIXEL_TYPE.NONE && y%2 !=0) ||
+                                (x == 0 && findPixel(x,Math.max(y-1, 0)).type != PIXEL_TYPE.NONE && y%2 == 0 &&
+                                        findPixel(x+1,Math.max(y-1, 0)).type != PIXEL_TYPE.NONE) ||
                                 (x == 6 && findPixel(Math.max(x-1, 0),Math.max(y-1, 0)).type != PIXEL_TYPE.NONE) ||
                                 (findPixel(y % 2 != 0 ? Math.max(x-1, 0) : x+1,Math.max(y-1, 0)).type != PIXEL_TYPE.NONE
                                         && findPixel(x,Math.max(y-1, 0)).type != PIXEL_TYPE.NONE)){
@@ -306,6 +324,39 @@ public class Board {
                 }
             }
             return null;
+        }
+
+        public Action[] getBestActions(){
+            int currentScore = score();
+            System.out.println(currentScore);
+            Board.Action[] possibleActions = getPossibleActions();
+            int maxScore = currentScore;
+            Board.Action[] maxScoreActions = null;
+            for(Board.Action action : possibleActions){
+                Board.Pixel pixel = findPixel(action.x, action.y);
+                Board.PIXEL_TYPE type = pixel.type;
+                pixel.type = action.type;
+                for(Board.Action action1 : getPossibleActions()){
+                    Board.Pixel pixel1 = findPixel(action1.x, action1.y);
+                    Board.PIXEL_TYPE type1 = pixel1.type;
+                    pixel1.type = action1.type;
+                    for (Board.Action action2 : getPossibleActions()){
+                        Board.Pixel pixel2 = findPixel(action2.x, action2.y);
+                        Board.PIXEL_TYPE type2 = pixel2.type;
+                        pixel2.type = action2.type;
+                        int score = score();
+                        if(score > maxScore){
+                            maxScore = score;
+                            maxScoreActions = new Board.Action[] {action, action1, action2};
+                        }
+                        findPixel(action2.x, action2.y).type = type2;
+                    }
+                    findPixel(action1.x, action1.y).type = type1;
+                }
+                findPixel(action.x, action.y).type = type;
+            }
+
+            return maxScoreActions;
         }
     }
 
