@@ -1,5 +1,8 @@
 package team.blackbeard.calc;
 
+import team.blackbeard.GameState;
+import team.blackbeard.HexagonSorter;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -212,12 +215,16 @@ public class Board {
             }
         }
 
-        public int score()
+        public int score(){
+            return score(pixels);
+        }
+
+        public int score(ArrayList<Pixel> board)
         {
             // Clear the inMosaic flags for the pixels.
-            for (int i = 0; i < this.pixels.size(); i++)
+            for (int i = 0; i < board.size(); i++)
             {
-                pixels.get(i).inMosaic = false;
+                board.get(i).inMosaic = false;
             }
 
             int totalPixels = 0;
@@ -230,21 +237,21 @@ public class Board {
             int mosaicCount = 0;
             int mosaicScore = 0;
 
-            for (int i = 0; i < this.pixels.size(); i++)
+            for (int i = 0; i < board.size(); i++)
             {
-                if (pixels.get(i).type != PIXEL_TYPE.NONE)
+                if (board.get(i).type != PIXEL_TYPE.NONE)
                 {
                     // Score each pixels individually.
                     totalPixels++;
 
                     // Update the highest row if necessary.
-                    if (pixels.get(i).y > highestRow)
+                    if (board.get(i).y > highestRow)
                     {
-                        highestRow = pixels.get(i).y;
+                        highestRow = board.get(i).y;
                     }
 
                     // Increment the mosaic counter if necessary.
-                    if (pixels.get(i).isMosaic())
+                    if (board.get(i).isMosaic())
                     {
                         mosaicCount++;
                     }
@@ -268,6 +275,30 @@ public class Board {
             return pixelScore + setLineScore + mosaicScore;
         }
 
+        public Action[] getPossibleActions(){
+            ArrayList<Action> actions = new ArrayList<>();
+            for (int y = 0; y < 12; y++){
+                for (int x = 0; x < 7; x++){
+                    Pixel pixel = findPixel(x,y);
+                    if(pixel == null)
+                        continue;
+                    if(pixel.type == PIXEL_TYPE.NONE){
+                        if(y == 0 ||
+                                (x == 0 && findPixel(x,Math.max(y-1, 0)).type != PIXEL_TYPE.NONE) ||
+                                (x == 6 && findPixel(Math.max(x-1, 0),Math.max(y-1, 0)).type != PIXEL_TYPE.NONE) ||
+                                (findPixel(y % 2 != 0 ? Math.max(x-1, 0) : x+1,Math.max(y-1, 0)).type != PIXEL_TYPE.NONE
+                                        && findPixel(x,Math.max(y-1, 0)).type != PIXEL_TYPE.NONE)){
+                            actions.add(new Action(PIXEL_TYPE.GREEN, x,y));
+                            actions.add(new Action(PIXEL_TYPE.PURPLE, x,y));
+                            actions.add(new Action(PIXEL_TYPE.YELLOW, x,y));
+                            actions.add(new Action(PIXEL_TYPE.WHITE, x,y));
+                        }
+                    }
+                }
+            }
+            return actions.toArray(new Action[0]);
+        }
+
         public Pixel findPixel(int x, int y){
             for(Pixel pixel : pixels){
                 if(pixel.x == x && pixel.y == y){
@@ -275,6 +306,23 @@ public class Board {
                 }
             }
             return null;
+        }
+    }
+
+    public static class Action{
+        public PIXEL_TYPE type;
+        public int x;
+        public int y;
+
+        public Action(PIXEL_TYPE type, int x, int y){
+            this.type = type;
+            this.x = x;
+            this.y = y;
+        }
+
+        @Override
+        public String toString(){
+            return "("+type + " " + x + ", " + y +")\n";
         }
     }
 
